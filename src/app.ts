@@ -53,7 +53,7 @@ const welcomeFlow1 = addKeyword<Provider, Database>(['#terminos'])
         }
     )
 
-const TestEtiqueta = addKeyword<Provider, Database>('#Etiqueta')
+const TestEtiqueta = addKeyword<Provider, Database>('#etiqueta')
     .addAnswer(`💡 Ejemplo de etiqueta`)
     .addAnswer(
         'What\'s your name ?',
