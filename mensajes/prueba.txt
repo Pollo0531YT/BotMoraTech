@@ -16,6 +16,4 @@ Obtén tu token siguiendo el video que te compartimos.
 👉 https://t.me/reventaMagisVPN_bot
 Sigue las instrucciones del bot con el comando /demo para activar tu prueba de forma automática.
 
-💥Si realizaste la prueba con el bot, envia *#usobasico* para recibir un video muy importante sobre como usar la aplicacion!💥
-
 -Escribe #vpn para volver al menu de operadores.
