@@ -74,7 +74,7 @@ const PruebaVPN = addKeyword<Provider, Database> (['#prueba'])
         await provider.vendor.sendPresenceUpdate('composing', ctx.key.remoteJid)
         await waitT(3000)})
     .addAnswer(prueba, { media: join(process.cwd(), 'BOT','TokenVideo.mp4') })
-    .addAnswer('💥Si realizaste la prueba con el bot de telegram, envia *#usobasico* para recibir un video muy importante sobre como usar la aplicacion!💥') 
+    .addAnswer('💥Si realizaste la prueba con el bot de telegram, envia *asd* para recibir un video muy importante sobre como usar la aplicacion!💥') 
 
 
 // Metodos de Pagos
