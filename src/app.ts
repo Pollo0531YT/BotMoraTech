@@ -53,6 +53,23 @@ const welcomeFlow1 = addKeyword<Provider, Database>(['#terminos'])
         }
     )
 
+const TestEtiqueta = addKeyword<Provider, Database>('#Etiqueta')
+    .addAnswer(`💡 Ejemplo de etiqueta`)
+    .addAnswer(
+        'What\'s your name ?',
+        { capture: true },
+        async (ctx, { provider, flowDynamic }) => {
+            await provider.vendor.chatModify(
+                {
+                    addChatLabel: {
+                        //NOTE labelId: '2' New Order
+                        labelId: '6'
+                    }
+                }, ctx.key.remoteJid
+            )
+            await flowDynamic(`Etiquetado como *Probando*`)
+        }
+    )
 
 // Anuncio 50gb
 const Promo50gb = addKeyword<Provider, Database> (['#50gb'])
@@ -177,7 +194,7 @@ const fullSamplesFlow = addKeyword<Provider, Database>(['samples', utils.setEven
 
 // Colocar los flows a usar    
 const main = async () => {
-    const adapterFlow = createFlow([MetodosDePago, UsoBasico50gb, Promo50gb, VPN, ClaroVPN, LibertyVPN, PruebaVPN])
+    const adapterFlow = createFlow([TestEtiqueta, MetodosDePago, UsoBasico50gb, Promo50gb, VPN, ClaroVPN, LibertyVPN, PruebaVPN])
     
     const adapterProvider = createProvider(Provider)
     const adapterDB = new Database()
