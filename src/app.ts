@@ -89,7 +89,7 @@ const PruebaVPN = addKeyword<Provider, Database> (['#prueba'])
 .addAction(
     async (ctx, { provider }) => {
         await provider.vendor.sendMessage(ctx.key.remoteJid, { react: { text: '🚀', key: ctx.key } });
-        await provider.vendor.chatModify({addChatLabel: {labelId: '23'}}, ctx.key.remoteJid); //Funcion para etiquetar
+        await provider.vendor.chatModify({ addChatLabel: { labelId: '32' } }, ctx.key.remoteJid);
         await provider.vendor.sendPresenceUpdate('composing', ctx.key.remoteJid)
         await waitT(3000)})
     .addAnswer(prueba, { media: join(process.cwd(), 'BOT','TokenVideo.mp4') })
