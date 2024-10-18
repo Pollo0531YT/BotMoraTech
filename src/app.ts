@@ -76,7 +76,7 @@ const PruebaVPN = addKeyword<Provider, Database> (['#prueba'])
     .addAnswer(prueba, { media: join(process.cwd(), 'BOT','TokenVideo.mp4') })
     .addAction(async () => {
     await waitT(3000);}) 
-    .addAnswer('💥Si realizaste la prueba con el bot, envia *#usobasico* para recibir un video muy importante sobre como usar la aplicacion!💥')    
+    .addAnswer(['💥Si realizaste la prueba con el bot, envia *#usobasico* para recibir un video muy importante sobre como usar la aplicacion!💥'])    
 
 
 // Metodos de Pagos
