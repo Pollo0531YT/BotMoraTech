@@ -32,7 +32,17 @@ const prueba = readFileSync(pruebaPath, "utf8");
 const vpnPath = path.join(process.cwd(), "mensajes", "vpn.txt");
 const vpn = readFileSync(vpnPath, "utf8");
 
-
+// ETIQUETAS DIA 18/10
+// 5 magistv
+// 10 falto pago
+// 12 vpn
+// 17 en proceso
+// 19 sticks
+// 21 casillero
+// 23 vencido
+// 26 important
+// 28 maps
+// 32 probando
 
 const EjemploEtiqueta = addKeyword<Provider, Database>('#test')
     .addAction(
@@ -79,6 +89,7 @@ const PruebaVPN = addKeyword<Provider, Database> (['#prueba'])
 .addAction(
     async (ctx, { provider }) => {
         await provider.vendor.sendMessage(ctx.key.remoteJid, { react: { text: '🚀', key: ctx.key } });
+        await provider.vendor.chatModify({addChatLabel: {labelId: '23'}}, ctx.key.remoteJid); //Funcion para etiquetar
         await provider.vendor.sendPresenceUpdate('composing', ctx.key.remoteJid)
         await waitT(3000)})
     .addAnswer(prueba, { media: join(process.cwd(), 'BOT','TokenVideo.mp4') })
@@ -185,7 +196,7 @@ const fullSamplesFlow = addKeyword<Provider, Database>(['samples', utils.setEven
 
 // Colocar los flows a usar    
 const main = async () => {
-    const adapterFlow = createFlow([TestEtiqueta, MetodosDePago, UsoBasico50gb, Promo50gb, VPN, ClaroVPN, LibertyVPN, PruebaVPN])
+    const adapterFlow = createFlow([MetodosDePago, UsoBasico50gb, Promo50gb, VPN, ClaroVPN, LibertyVPN, PruebaVPN])
     
     const adapterProvider = createProvider(Provider)
     const adapterDB = new Database()
