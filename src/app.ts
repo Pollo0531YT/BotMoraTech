@@ -32,6 +32,7 @@ const prueba = readFileSync(pruebaPath, "utf8");
 const vpnPath = path.join(process.cwd(), "mensajes", "vpn.txt");
 const vpn = readFileSync(vpnPath, "utf8");
 
+
 // ETIQUETAS DIA 18/10
 // 5 magistv
 // 10 falto pago
@@ -43,34 +44,6 @@ const vpn = readFileSync(vpnPath, "utf8");
 // 26 important
 // 28 maps
 // 32 probando
-
-const EjemploEtiqueta = addKeyword<Provider, Database>('#test')
-    .addAction(
-        async (ctx, { provider, flowDynamic }) => {
-            await provider.vendor.sendMessage(ctx.key.remoteJid, { react: { text: '⚠️', key: ctx.key } });  //Funcion para reaccionar
-            await provider.vendor.chatModify({addChatLabel: {labelId: '2'}}, ctx.key.remoteJid); //Funcion para etiquetar
-            await flowDynamic ('Etiquetado')
-        }
-    );
-
-const EjemploEncuesta = addKeyword<Provider, Database>(['#test'])
-    .addAnswer(`Terminos y condiciones`)
-    .addAction(
-        async (ctx, { provider, flowDynamic }) => {
-            //await flowDynamic('*Poll*')
-            const number = ctx.key.remoteJid
-            await provider.vendor.sendMessage(
-                number, {
-                poll:
-                {
-                    "name": "Aceptas los terminos y condiciones?",
-                    "values": ["Si", "No"],
-                    "selectableCount": 1,
-                }
-            }
-            )
-        }
-    )
 
 // Anuncio 50gb
 const Promo50gb = addKeyword<Provider, Database> (['#50gb'])
@@ -89,11 +62,11 @@ const PruebaVPN = addKeyword<Provider, Database> (['#prueba'])
 .addAction(
     async (ctx, { provider }) => {
         await provider.vendor.sendMessage(ctx.key.remoteJid, { react: { text: '🚀', key: ctx.key } });
-        await provider.vendor.chatModify({ addChatLabel: { labelId: '32' } }, ctx.key.remoteJid);
+        await provider.vendor.chatModify({ addChatLabel: { labelId: '32' } }, ctx.key.remoteJid)
         await provider.vendor.sendPresenceUpdate('composing', ctx.key.remoteJid)
         await waitT(3000)})
     .addAnswer(prueba, { media: join(process.cwd(), 'BOT','TokenVideo.mp4') })
-    .addAnswer(['Si realizaste la prueba con el bot de telegram' , '-Envia *#usobasico* para recibir un video muy importante sobre como usar la aplicacion!💥']) 
+    .addAnswer(['💥Si realizaste la prueba con el bot, envia *#usobasico* para recibir un video muy importante sobre como usar la aplicacion!💥'])    
 
 
 // Metodos de Pagos
@@ -138,6 +111,49 @@ const LibertyVPN = addKeyword<Provider, Database> (['#liberty'])
         await waitT(3000)})
     .addAnswer(liberty, { media: join(process.cwd(), 'BOT', 'liberty.png') })    
 
+
+//COSAS MIAS
+const BuscadorDeEtiquetas = addKeyword<Provider, Database>('#buscar')
+    .addAction(
+        async (ctx, { provider, flowDynamic }) => {
+            const chatId = ctx.key.remoteJid;
+
+            // Reaccionar al mensaje con ⚠️
+            await provider.vendor.sendMessage(chatId, { react: { text: '⚠️', key: ctx.key } });
+
+            // Esperar 2 segundos antes de empezar
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Aplicar etiquetas desde la 1 hasta la 15 con 1 segundo de espera entre cada una
+            for (let labelId = 23; labelId <= 23; labelId++) {
+                await provider.vendor.chatModify({ addChatLabel: { labelId: labelId.toString() } }, chatId);
+                await flowDynamic(`Etiqueta ${labelId} aplicada`);
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Esperar 1 segundo antes de la siguiente etiqueta
+            }
+        }
+    );
+
+
+const EjemploEncuesta = addKeyword<Provider, Database>(['#test'])
+    .addAnswer(`Terminos y condiciones`)
+    .addAction(
+        async (ctx, { provider, flowDynamic }) => {
+            //await flowDynamic('*Poll*')
+            const number = ctx.key.remoteJid
+            await provider.vendor.sendMessage(
+                number, {
+                poll:
+                {
+                    "name": "Aceptas los terminos y condiciones?",
+                    "values": ["Si", "No"],
+                    "selectableCount": 1,
+                }
+            }
+            )
+        }
+    )
+
+//FIN
         
 const discordFlow = addKeyword<Provider, Database>('doc').addAnswer(
     ['You can see the documentation here', '📄 https://builderbot.app/docs \n', 'Do you want to continue? *yes*'].join(
