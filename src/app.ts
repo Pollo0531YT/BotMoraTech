@@ -34,7 +34,16 @@ const vpn = readFileSync(vpnPath, "utf8");
 
 
 
-const welcomeFlow1 = addKeyword<Provider, Database>(['#terminos'])
+const EjemploEtiqueta = addKeyword<Provider, Database>('#test')
+    .addAction(
+        async (ctx, { provider, flowDynamic }) => {
+            await provider.vendor.sendMessage(ctx.key.remoteJid, { react: { text: '⚠️', key: ctx.key } });  //Funcion para reaccionar
+            await provider.vendor.chatModify({addChatLabel: {labelId: '2'}}, ctx.key.remoteJid); //Funcion para etiquetar
+            await flowDynamic ('Etiquetado')
+        }
+    );
+
+const EjemploEncuesta = addKeyword<Provider, Database>(['#test'])
     .addAnswer(`Terminos y condiciones`)
     .addAction(
         async (ctx, { provider, flowDynamic }) => {
@@ -50,24 +59,6 @@ const welcomeFlow1 = addKeyword<Provider, Database>(['#terminos'])
                 }
             }
             )
-        }
-    )
-
-const TestEtiqueta = addKeyword<Provider, Database>('#etiqueta')
-    .addAnswer(`💡 Ejemplo de etiqueta`)
-    .addAnswer(
-        'What\'s your name ?',
-        { capture: true },
-        async (ctx, { provider, flowDynamic }) => {
-            await provider.vendor.chatModify(
-                {
-                    addChatLabel: {
-                        //NOTE labelId: '2' New Order
-                        labelId: '6'
-                    }
-                }, ctx.key.remoteJid
-            )
-            await flowDynamic(`Etiquetado como *Probando*`)
         }
     )
 
