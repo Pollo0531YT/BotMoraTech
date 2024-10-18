@@ -1,0 +1,23 @@
+[handleMsg]:  {
+  key: {
+    remoteJid: '50688087921@s.whatsapp.net',
+    fromMe: false,
+    id: '061436D3CB1B5352A3CC5CB29FD70984',
+    participant: undefined
+  },
+  messageTimestamp: 1729219260,
+  pushName: 'Alexis Valencia',
+  broadcast: false,
+  message: Message {
+    conversation: 'El internet liberty sirve en isla chira puntarenas',
+    messageContextInfo: MessageContextInfo {
+      deviceListMetadata: [DeviceListMetadata],
+      deviceListMetadataVersion: 2,
+      messageSecret: [Uint8Array]
+    }
+  },
+  body: 'El internet liberty sirve en isla chira puntarenas',
+  name: 'Alexis Valencia',
+  from: '50688087921',
+  host: '50663465041'
+}
